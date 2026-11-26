@@ -1,0 +1,22 @@
+---
+description: BookMyShow project context — concurrency, inventory, payments, caching
+alwaysApply: true
+---
+
+# BMS (`bms_main`) — always apply
+
+Full detail: `CONTEXT.md` + `LLD.md` in this project. Treat them as source of truth.
+
+## Goal
+Build a BookMyShow-like booking system. Hard problem is **correct seat inventory under concurrency**, not UI.
+
+## Non-negotiables
+- Seats/stock: never naive read→decide→write. Use conditional `UPDATE`, `FOR UPDATE`, or unique `(show_id, seat_id)` constraints.
+- Prefer **hold (TTL) → confirm** over instant permanent book.
+- Payments / confirm: **idempotency keys**; retries must not double-charge or double-book.
+- Hot paths: Redis rate limits when multi-instance; cache-aside for slow-changing reads only (invalidate on write + TTL + stampede protection).
+- Scale DB access via bulk queries (no N+1) and PgBouncer; don't open huge per-instance pools straight to Postgres.
+- Side effects (email/SMS/PDF/expire holds): job table + `FOR UPDATE SKIP LOCKED`, exponential backoff, dead-letter.
+
+## Reference
+Sibling lab `../race_condition` shows oversell and fixes (`for-update`, `optimistic`, `atomic`). Reuse those ideas for seats; never ship naive buy logic.

@@ -1,0 +1,113 @@
+.screen {
+  margin: 1.5rem auto 2rem;
+  width: min(520px, 100%);
+  text-align: center;
+  letter-spacing: 0.35em;
+  font-size: 0.75rem;
+  color: var(--muted);
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(28, 25, 20, 0.08), transparent);
+}
+
+.map {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.rowLabel {
+  width: 1.2rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.rowSeats {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.seat {
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 0.55rem 0.55rem 0.35rem 0.35rem;
+  border: none;
+  background: var(--seat);
+  color: #f4f1ea;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8rem;
+}
+
+.seat:hover:not(:disabled) {
+  filter: brightness(1.15);
+}
+
+.selected {
+  background: var(--seat-sel);
+}
+
+.taken {
+  background: var(--seat-busy);
+  color: #5c554c;
+  cursor: not-allowed;
+}
+
+.legend {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.swatch {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 0.25rem;
+  display: inline-block;
+}
+
+.swatchFree {
+  background: var(--seat);
+}
+
+.swatchSel {
+  background: var(--seat-sel);
+}
+
+.swatchBusy {
+  background: var(--seat-busy);
+}
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding: 1rem 1.15rem;
+  border-radius: 16px;
+  background: color-mix(in srgb, white 65%, var(--paper));
+  border: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+}
+
+.actions {
+  display: flex;
+  gap: 0.6rem;
+}

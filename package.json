@@ -1,0 +1,32 @@
+{
+  "name": "bms-main",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "ensure-db": "node src/db/ensure-db.js",
+    "migrate": "node src/db/migrate.js",
+    "seed": "node src/db/seed.js",
+    "setup": "node src/db/ensure-db.js && node src/db/migrate.js && node src/db/seed.js",
+    "server": "node src/server.js",
+    "smoke": "node scripts/smoke.js",
+    "smoke:ratelimit": "node scripts/smoke-ratelimit.js",
+    "smoke:expire-cancel": "node scripts/smoke-expire-cancel.js",
+    "bench:hold": "node scripts/bench-hold.js",
+    "smoke:jobs-cache": "node scripts/smoke-jobs-cache.js",
+    "smoke:smtp": "node scripts/smoke-smtp.js",
+    "smoke:idempotent": "node scripts/smoke-idempotent-book.js",
+    "worker:expire": "node src/jobs/expireHoldsWorker.js",
+    "worker:jobs": "node src/jobs/worker.js",
+    "redis:up": "docker compose up -d",
+    "redis:down": "docker compose down",
+    "web": "npm --prefix web run dev"
+  },
+  "dependencies": {
+    "@clerk/backend": "^3.33.0",
+    "dotenv": "^16.4.7",
+    "ioredis": "^6.1.0",
+    "nodemailer": "^10.6.1",
+    "pg": "^8.13.1"
+  }
+}
